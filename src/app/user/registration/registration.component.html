@@ -1,0 +1,43 @@
+<div class="mb-4 text-success h2">
+    Sign up
+</div>
+
+<form [formGroup]="registerForm"  (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="userName" formControlName="userName">
+        <div class="error"  *ngIf="registerForm.controls.userName.touched &&registerForm.controls.userName.hasError('required') ">Please Enter Your Name</div>
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Email" formControlName="Email">
+        <div *ngIf="registerForm.get('Email').touched">
+             <span class="error" *ngIf="registerForm.controls.Email.hasError('required')">Email is required.</span>
+             <span class="error" *ngIf="registerForm.controls.Email.hasError('email')">Invalid email format.</span>
+        </div>
+    </div>
+    <div class="mb-3">
+        <input type="Password" class="form-control bg-body-secondary" placeholder="password" formControlName="Password">
+          <div *ngIf="registerForm.get('Password').touched">
+                <span class="error" *ngIf="registerForm.controls.Password.hasError('required')">Password is required.</span>
+                <span class="error" *ngIf="registerForm.controls.Password.hasError('minlength')">
+                         Password must be at least 6 characters long.
+                </span>
+         </div>
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control bg-body-secondary" placeholder="Confirm Password" formControlName="confirmPassword">
+         <div *ngIf="registerForm.get('confirmPassword').touched">
+            <span class="error" *ngIf="registerForm.controls.confirmPassword.hasError('required')">
+             Confirm Password is required.
+            </span>
+            <div class="error" *ngIf="registerForm.errors?.['passwordMismatch']">
+                 <span>Passwords do not match.</span>
+            </div>
+        </div>
+  </div>
+
+  
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100" >Register</button>
+    </div>
+</form>
