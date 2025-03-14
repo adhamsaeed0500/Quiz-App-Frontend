@@ -1,0 +1,35 @@
+<div class="mb-4 ">
+    <h2 class="text-success">
+        sign in
+    </h2>
+    <div class="">
+        do not have account?
+        <a routerLink= "/signup" routerLinkActive="router-link-active"  class="text-decoration-none fw-medium text-success">sign up</a>
+    </div>
+</div>
+
+<form [formGroup]="loginForm" (ngSubmit)="onsubmit()">
+  <div class="mb-3">
+        <input class="form-control bg-body-secondary" placeholder="Email" formControlName="Email">
+        <div *ngIf="loginForm.get('Email').touched">
+             <span class="error" *ngIf="loginForm.controls.Email.hasError('required')">Email is required.</span>
+             <span class="error" *ngIf="loginForm.controls.Email.hasError('email')">Invalid email format.</span>
+        </div>
+    </div>
+
+    <div class="mb-3">
+        <input type="Password" class="form-control bg-body-secondary" placeholder="password" formControlName="Password">
+          <div *ngIf="loginForm.get('Password').touched">
+                <span class="error" *ngIf="loginForm.controls.Password.hasError('required')">Password is required.</span>
+                <span class="error" *ngIf="loginForm.controls.Password.hasError('minlength')">
+                         Password must be at least 6 characters long.
+                </span>
+         </div>
+    </div>
+
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100" >Submit</button>
+    </div>
+
+
+</form>

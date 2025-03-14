@@ -3,13 +3,14 @@ import { Component } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { UserApiService } from '../service/userApi.service';
 import { ToastrService } from 'ngx-toastr';
+import { RouterLink } from '@angular/router';
 
 
 
 @Component({
   selector: 'app-registration',
   standalone: true,
-  imports: [ReactiveFormsModule,CommonModule],
+  imports: [ReactiveFormsModule,CommonModule,RouterLink],
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
@@ -47,9 +48,9 @@ onSubmit(){
     this.user.register(this.registerForm.value).subscribe({
       next:res=>
       {
-        this.registerForm.reset();
-        console.log(res)
+        this.registerForm.reset();       
          this.toastr.success("user created successfully","",{timeOut: 3000,});
+         
 
 
       },

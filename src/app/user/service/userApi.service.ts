@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RegisterModel } from '../models/registerModel';
 import { Observable } from 'rxjs';
+import { LoginModel } from '../models/loginModel';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,11 @@ constructor(private htttp:HttpClient) { }
 
 register(registerData:RegisterModel):Observable<any>{
   return this.htttp.post<any>(`${this.baseUrl}/Register`,registerData);
+
+}
+
+login(loginModel:LoginModel):Observable<any>{
+  return this.htttp.post<any>(`${this.baseUrl}/Login`,loginModel);
 
 }
 
