@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component, OnInit} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserApiService } from '../service/userApi.service';
@@ -13,12 +13,16 @@ import { AuthService } from '../../shared/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   constructor(private login:UserApiService , private router:Router,private toastr:ToastrService,
     private auth :AuthService) { }
 
 
+  ngOnInit(): void {
+    if(this.auth.isLogged())
+      this.router.navigateByUrl("/dashboard"); 
+  }
 
   loginForm=new FormGroup({
     Email:new FormControl('',[Validators.required,Validators.email]),

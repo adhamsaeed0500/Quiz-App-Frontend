@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { UserApiService } from '../service/userApi.service';
 import { ToastrService } from 'ngx-toastr';
@@ -15,11 +15,14 @@ import { HandleRegistrationErrorService } from '../service/handle-registration-e
   templateUrl: './registration.component.html',
   styleUrl: './registration.component.css'
 })
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
 
 
 constructor(private user:UserApiService ,private toastr: ToastrService , private router:Router,
   private handleError:HandleRegistrationErrorService) { }
+  ngOnInit(): void {
+    this.router.navigateByUrl("/dashboard");
+  }
   
   passwordMatch(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
