@@ -4,6 +4,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { Router, RouterLink } from '@angular/router';
 import { UserApiService } from '../service/userApi.service';
 import { ToastrService } from 'ngx-toastr';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent {
 
-  constructor(private login:UserApiService , private router:Router,private toastr:ToastrService) { }
+  constructor(private login:UserApiService , private router:Router,private toastr:ToastrService,
+    private auth :AuthService) { }
 
 
 
@@ -29,8 +31,8 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.login.login(loginValue).subscribe({
         next:res=>{
-          localStorage.setItem("token",res.token);
-          localStorage.setItem("tokenTime",res.expiration);
+          this.auth.saveToken(res.token);
+          this.auth.saveTokenExpirationDate(res.expiration);
           this.router.navigateByUrl("/dashboard");
         },
         error:err=>{
