@@ -25,27 +25,21 @@ export class LoginComponent {
    );
   
    onsubmit(){
-
+    const loginValue = this.loginForm.value;
     if(this.loginForm.valid){
-      this.login.login(this.loginForm.value).subscribe({
+      this.login.login(loginValue).subscribe({
         next:res=>{
           localStorage.setItem("token",res.token);
+          localStorage.setItem("tokenTime",res.expiration);
           this.router.navigateByUrl("/dashboard");
         },
         error:err=>{
-          if(err.status = 400){
-            this.toastr.error("Invalid email or password","",{timeOut:3000})
-          }else(err.status == 500)
-          this.toastr.error("there is problem please try later","",{timeOut:3000})
-        }
-      });
-      
-
-
+          if(err.status = 400)
+              this.toastr.error("Invalid email or password","",{timeOut:3000})  
+          else         
+              this.toastr.error("login failed please try later","",{timeOut:3000})
+    }});
     }
-
-
-
    }
 
  

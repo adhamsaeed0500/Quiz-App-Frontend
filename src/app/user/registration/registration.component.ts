@@ -3,7 +3,8 @@ import { Component } from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ReactiveFormsModule, ValidationErrors, ValidatorFn, Validators} from '@angular/forms';
 import { UserApiService } from '../service/userApi.service';
 import { ToastrService } from 'ngx-toastr';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { HandleRegistrationErrorService } from '../service/handle-registration-error.service';
 
 
 
@@ -17,7 +18,8 @@ import { RouterLink } from '@angular/router';
 export class RegistrationComponent {
 
 
-constructor(private user:UserApiService ,private toastr: ToastrService) { }
+constructor(private user:UserApiService ,private toastr: ToastrService , private router:Router,
+  private handleError:HandleRegistrationErrorService) { }
   
   passwordMatch(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -44,37 +46,22 @@ registerForm=new FormGroup({
 
 
 onSubmit(){
+  if(!this.registerForm.valid)
+    this.toastr.error("invalid form please try agian","",{timeOut: 3000,});
+
+  const userData = this.registerForm.value;
   if(this.registerForm.valid){
-    this.user.register(this.registerForm.value).subscribe({
+    this.user.register(userData).subscribe({
       next:res=>
       {
         this.registerForm.reset();       
          this.toastr.success("user created successfully","",{timeOut: 3000,});
-         
-
-
+         this.router.navigateByUrl("/dashboard");
       },
       error:err=>
       {
-
-        for (let [key, value] of Object.entries(err.error)) 
-          {
-          switch(key){
-            case"DuplicateEmail":
-            this.toastr.error("user already exists please login in","registration failed",{timeOut:3000})
-            break;
-
-            case"DuplicateUserName":
-            this.toastr.error("username already exists please try another name","registration failed",{timeOut:3000})
-            break;
-
-            default:
-              this.toastr.error("registration failed try agian")
-
-          }
-  
-          }
-               
+        const error = err.error;
+        this.handleError.HandleRegistrationError(error);       
       }
     })
 
