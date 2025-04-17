@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { TOKEN_EXPIRATION_DATE, TOKEN_KEY } from '../constants';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,9 @@ export class AuthService {
 
   constructor() { }
 
-  isLogged(){
+  isloggedIn$ =  BehaviorSubject<false>;
+
+  isTokenExists(){
     return (localStorage.getItem("token")) ? true:false
   }
 
@@ -16,8 +19,12 @@ export class AuthService {
   localStorage.setItem(TOKEN_KEY,token);
  }
 
+ getToken(token:any){
+  localStorage.getItem(TOKEN_KEY);
+ }
+
  removeToken(){
-  localStorage.removeItem(TOKEN_KEY);
+  //localStorage.removeItem(TOKEN_KEY);
  }
 
  saveTokenExpirationDate(expiration:any){

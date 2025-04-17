@@ -7,7 +7,7 @@ import { authGuard } from './shared/gaurds/auth.guard';
 
 export const routes: Routes = [
     {path:'', redirectTo:"signin",pathMatch:'full'},
-    {path:'dashboard',component:DashboardComponent,canActivate:[authGuard]},
+    {path:'dashboard',component:DashboardComponent},
     {path:'',component:UserComponent,
         children:[
             {path:'signup',component:RegistrationComponent},

@@ -21,7 +21,8 @@ export class RegistrationComponent implements OnInit {
 constructor(private user:UserApiService ,private toastr: ToastrService , private router:Router,
   private handleError:HandleRegistrationErrorService) { }
   ngOnInit(): void {
-    this.router.navigateByUrl("/dashboard");
+    // if(this.auth.isLogged())
+    //   this.router.navigateByUrl("/dashboard"); 
   }
   
   passwordMatch(): ValidatorFn {

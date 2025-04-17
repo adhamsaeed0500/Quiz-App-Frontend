@@ -20,8 +20,8 @@ export class LoginComponent implements OnInit {
 
 
   ngOnInit(): void {
-    if(this.auth.isLogged())
-      this.router.navigateByUrl("/dashboard"); 
+    // if(this.auth.isLogged())
+    //   this.router.navigateByUrl("/dashboard"); 
   }
 
   loginForm=new FormGroup({

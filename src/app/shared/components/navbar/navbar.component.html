@@ -1,0 +1,32 @@
+<!-- navbar.component.html -->
+<nav>
+  <div class="logo">
+    <img src="assets/logo.png" alt="Logo">
+    <h1>Exam</h1>
+  </div>
+
+  <div class="menu-toggle" (click)="toggleMobileMenu()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <ul class="nav-links" [class.active]="isMobileMenuActive">
+    <li><a href="#">Home</a></li>
+    <li><a href="#">About</a></li>
+    <li class="dropdown" [class.active]="isDropdownActive">
+      <a href="#" (click)="toggleDropdown($event)">Services <i class="fas fa-caret-down"></i></a>
+      <div class="dropdown-content">
+        <a href="#">Web Design</a>
+        <a href="#">Graphic Design</a>
+        <a href="#">SEO</a>
+      </div>
+    </li>
+    <li><a href="#">Contact</a></li>
+    
+    <div class="auth-buttons">
+      <a href="#" class="login-btn" >Login</a>
+      <a href="#" class="logout-btn" >Logout</a>
+    </div>
+  </ul>
+</nav>
