@@ -5,6 +5,7 @@ import { Router, RouterLink } from '@angular/router';
 import { UserApiService } from '../service/userApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from '../../shared/services/auth.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -35,7 +36,9 @@ export class LoginComponent implements OnInit {
     if(this.loginForm.valid){
       this.login.login(loginValue).subscribe({
         next:res=>{
+          this.auth.isloggedIn$.next(true);
           this.auth.saveToken(res.token);
+          console.log(this.auth.getClaims());
           this.auth.saveTokenExpirationDate(res.expiration);
           this.router.navigateByUrl("/dashboard");
         },

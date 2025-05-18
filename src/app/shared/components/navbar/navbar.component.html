@@ -25,8 +25,12 @@
     <li><a href="#">Contact</a></li>
     
     <div class="auth-buttons">
-      <a href="#" class="login-btn" >Login</a>
-      <a href="#" class="logout-btn" >Logout</a>
+      @if (!navBarIsLogged || navBarIsSubmitted) {
+        <a routerLink= "/signin" routerLinkActive="router-link-active" class="login-btn" >Login</a>
+      }@else {
+        <a href="#" class="login-btn" >{{claims?.["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"]}}</a>
+      }
+      <a href="#" (click)="RemoveToken()" class="logout-btn" >Logout</a>
     </div>
   </ul>
 </nav>

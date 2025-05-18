@@ -5,6 +5,7 @@ import { UserApiService } from '../service/userApi.service';
 import { ToastrService } from 'ngx-toastr';
 import { Router, RouterLink } from '@angular/router';
 import { HandleRegistrationErrorService } from '../service/handle-registration-error.service';
+import { AuthService } from '../../shared/services/auth.service';
 
 
 
@@ -19,7 +20,7 @@ export class RegistrationComponent implements OnInit {
 
 
 constructor(private user:UserApiService ,private toastr: ToastrService , private router:Router,
-  private handleError:HandleRegistrationErrorService) { }
+  private handleError:HandleRegistrationErrorService , private auth : AuthService) { }
   ngOnInit(): void {
     // if(this.auth.isLogged())
     //   this.router.navigateByUrl("/dashboard"); 
@@ -60,6 +61,7 @@ onSubmit(){
       {
         this.registerForm.reset();       
          this.toastr.success("user created successfully","",{timeOut: 3000,});
+         this.auth.isSubmitedIn$.next(true);
          this.router.navigateByUrl("/dashboard");
       },
       error:err=>
