@@ -39,7 +39,7 @@ export class NavbarComponent implements OnInit {
     this.auth.removeToken();
     this.auth.removeTokenExpirationDate();
     this.auth.isloggedIn$.next(false);
-    this.router.navigateByUrl("/sign");
+    this.router.navigateByUrl("/signin");
   }
 
 
