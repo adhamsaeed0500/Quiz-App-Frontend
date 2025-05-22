@@ -16,11 +16,14 @@ constructor(private htttp:HttpClient) { }
 
 register(registerData:RegisterModel):Observable<any>{
   return this.htttp.post<any>(`${environment.apiBaseUrl}/Account/Register`,registerData);
-
 }
 
 login(loginModel:LoginModel):Observable<any>{
   return this.htttp.post<any>(`${environment.apiBaseUrl}/Account/Login`,loginModel);
+}
+
+ForgetPassword(ForgetPassword:string):Observable<any>{
+  return this.htttp.post<any>(`${environment.apiBaseUrl}/Account/ForgetPassword`,ForgetPassword);
 
 }
 

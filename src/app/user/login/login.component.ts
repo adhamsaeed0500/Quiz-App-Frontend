@@ -38,7 +38,6 @@ export class LoginComponent implements OnInit {
         next:res=>{
           this.auth.isloggedIn$.next(true);
           this.auth.saveToken(res.token);
-          console.log(this.auth.getClaims());
           this.auth.saveTokenExpirationDate(res.expiration);
           this.router.navigateByUrl("/dashboard");
         },
