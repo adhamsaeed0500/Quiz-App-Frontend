@@ -9,7 +9,7 @@ import { NavbarComponent } from '../shared/components/navbar/navbar.component';
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class mainComponent implements OnInit {
 
   constructor() { }
 
