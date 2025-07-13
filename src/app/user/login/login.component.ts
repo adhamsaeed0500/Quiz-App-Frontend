@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
           this.auth.isloggedIn$.next(true);
           this.auth.saveToken(res.token);
           this.auth.saveTokenExpirationDate(res.expiration);
-          this.router.navigateByUrl("/dashboard");
+          this.router.navigateByUrl("/main");
         },
         error:err=>{
           if(err.status = 400)

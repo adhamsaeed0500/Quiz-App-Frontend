@@ -6,14 +6,14 @@ import { NavbarComponent } from '../shared/components/navbar/navbar.component';
   selector: 'app-dashboard',
   standalone:true,
   imports:[RouterOutlet,NavbarComponent,RouterModule],
-  templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
 export class DashboardComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { 
   }
 
 }

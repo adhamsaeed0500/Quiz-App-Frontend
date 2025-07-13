@@ -62,7 +62,7 @@ onSubmit(){
         this.registerForm.reset();       
          this.toastr.success("user created successfully","",{timeOut: 3000,});
          this.auth.isSubmitedIn$.next(true);
-         this.router.navigateByUrl("/dashboard");
+         this.router.navigateByUrl("/main");
       },
       error:err=>
       {

@@ -2,18 +2,13 @@ import { Routes } from '@angular/router';
 import { UserComponent } from './user/user.component';
 import { RegistrationComponent } from './user/registration/registration.component';
 import { LoginComponent } from './user/login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
+import { DashboardComponent } from './main/main.component';
 import { authGuard } from './shared/gaurds/auth.guard';
 import { ForgetPasswordComponent } from './user/forget-password/forget-password.component';
-import { CreateExamComponent } from './dashboard/create-exam/create-exam.component';
 
 export const routes: Routes = [
     {path:'', redirectTo:"signin",pathMatch:'full'},
-    {path:'dashboard',component:DashboardComponent,
-        children:[
-            {path:'CreateExam',component:CreateExamComponent},
-        ]
-    },
+    {path:'main',component:DashboardComponent},
     {path:'',component:UserComponent,
         children:[
             {path:'signup',component:RegistrationComponent},
